@@ -8,10 +8,8 @@ ARG DEV_PACKAGES="postgresql-dev yaml-dev zlib-dev nodejs yarn"
 #ARG DEV_PACKAGES="libyaml-dev zlib1g-dev nodejs yarn"
 ARG RUBY_PACKAGES="tzdata"
 
-#ENV RAILS_ENV=production
-#ENV NODE_ENV=production
-ENV RAILS_ENV=development
-ENV NODE_ENV=development
+ENV RAILS_ENV=production
+ENV NODE_ENV=production
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
 ENV RUBY_VER=2.7.0
 
@@ -37,8 +35,7 @@ RUN bundle install -j4 --retry 3 --path=vendor/bundle \
     && find vendor/bundle/ruby/$RUBY_VER/gems/ -name "*.c" -delete \
     && find vendor/bundle/ruby/$RUBY_VER/gems/ -name "*.o" -delete
 
-#RUN yarn install --production
-RUN yarn install --development
+RUN yarn install --production
 COPY . .
 RUN yarn install --check-files
 RUN bin/rails webpacker:compile
@@ -54,8 +51,7 @@ FROM ruby:2.7.0-alpine3.10
 ARG RAILS_ROOT=/app
 ARG PACKAGES="tzdata postgresql-client nodejs bash"
 
-#ENV RAILS_ENV=production
-ENV RAILS_ENV=development
+ENV RAILS_ENV=production
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
 
 WORKDIR $RAILS_ROOT
