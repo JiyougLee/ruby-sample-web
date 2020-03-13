@@ -27,7 +27,7 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=/kube/config
+      - --filename=/tmp/kubeconfig
       - --image=gcr.io/$PROJECT_ID/ruby-sample-web-image:latest
       - --location=asia-northeast3-a
       - --cluster=test-application-cluster-1
