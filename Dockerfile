@@ -37,9 +37,10 @@ RUN bundle install -j4 --retry 3 --path=vendor/bundle \
     && find vendor/bundle/ruby/$RUBY_VER/gems/ -name "*.c" -delete \
     && find vendor/bundle/ruby/$RUBY_VER/gems/ -name "*.o" -delete
 
-RUN yarn install --production
+#RUN yarn install --production
+RUN yarn install --development
 COPY . .
-RUN ls -alrt bin/
+RUN yarn install --check-files
 RUN bin/rails webpacker:compile
 RUN bin/rails assets:precompile
 
