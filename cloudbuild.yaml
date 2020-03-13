@@ -6,10 +6,10 @@ steps:
   #  args: ['build', '--tag=gcr.io/$PROJECT_ID/git', '.']
   - name: 'gcr.io/cloud-builders/git' # public
     #- name: gcr.io/$PROJECT_ID/git # if you use customized git docker version
-    args: ['clone', 'https://github.com/JiyougLee/ruby-simple-web-pub.git']
+    args: ['clone', 'https://github.com/JiyougLee/ruby-sample-web.git']
   #  volumes:
   #  - name: 'workspace'
   #    path: '~/workspace'
   #  dir: '/home/jiyoung_lee/workspace'
   - name: gcr.io/cloud-builders/docker
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ruby-simple-web-image', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ruby-sample-web-image', '.']
