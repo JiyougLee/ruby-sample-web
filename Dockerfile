@@ -8,8 +8,10 @@ ARG DEV_PACKAGES="postgresql-dev yaml-dev zlib-dev nodejs yarn"
 #ARG DEV_PACKAGES="libyaml-dev zlib1g-dev nodejs yarn"
 ARG RUBY_PACKAGES="tzdata"
 
-ENV RAILS_ENV=production
-ENV NODE_ENV=production
+#ENV RAILS_ENV=production
+#ENV NODE_ENV=production
+ENV RAILS_ENV=development
+ENV NODE_ENV=development
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
 ENV RUBY_VER=2.7.0
 
@@ -51,7 +53,8 @@ FROM ruby:2.7.0-alpine3.10
 ARG RAILS_ROOT=/app
 ARG PACKAGES="tzdata postgresql-client nodejs bash"
 
-ENV RAILS_ENV=production
+#ENV RAILS_ENV=production
+ENV RAILS_ENV=development
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
 
 WORKDIR $RAILS_ROOT
