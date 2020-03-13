@@ -27,7 +27,7 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=/tmp/kubeconfig
+      - --filename=gs://fiery-surf-258805_cloudbuild/kubeconfig
       - --image=gcr.io/$PROJECT_ID/ruby-sample-web-image:latest
       - --location=asia-northeast3-a
       - --cluster=test-application-cluster-1
