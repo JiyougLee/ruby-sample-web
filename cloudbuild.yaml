@@ -28,7 +28,8 @@ steps:
     args:
       - run
       #- --filename=gs://fiery-surf-258805_cloudbuild/kubeconfig.yaml
-      - --filename=https://storage.cloud.google.com/fiery-surf-258805_cloudbuild/kubeconfig.yaml
+      #- --filename=https://storage.cloud.google.com/fiery-surf-258805_cloudbuild/kubeconfig.yaml
+      - --filename=kubeconfig.yaml
       - --image=gcr.io/$PROJECT_ID/ruby-sample-web-image:latest
       - --location=asia-northeast3-a
       - --cluster=test-application-cluster-1
