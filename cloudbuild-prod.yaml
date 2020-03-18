@@ -1,0 +1,35 @@
+steps:
+  # Pull the latest gcloud image.
+  #- name: 'gcr.io/cloud-builders/docker'
+  #  args: ['pull', 'gcr.io/cloud-builders/gcloud']
+  #- name: 'gcr.io/cloud-builders/docker'
+  #  args: ['build', '--tag=gcr.io/$PROJECT_ID/git', '.']
+
+  # Get source
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/JiyougLee/ruby-sample-web.git']
+
+  # build docker image
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ruby-sample-web-image', '.']
+
+  # push docker image
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "gcr.io/$PROJECT_ID/ruby-sample-web-image:latest"]
+
+#  - name: 'gcr.io/cloud-builders/kubectl'
+#    args: ['set', 'image', 'deployment/ruby-sample-web', 'my-container=gcr.io/$PROJECT_ID/ruby-sample-web-image']
+#    env:
+#      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast3-a'
+#      - 'CLOUDSDK_CONTAINER_CLUSTER=test-application-cluster-1'
+
+  # deploy to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      #- --filename=gs://fiery-surf-258805_cloudbuild/kubeconfig.yaml
+      #- --filename=https://storage.cloud.google.com/fiery-surf-258805_cloudbuild/kubeconfig.yaml
+      - --filename=kubeconfig.yaml
+      - --image=gcr.io/$PROJECT_ID/ruby-sample-web-image:latest
+      - --location=asia-northeast3-a
+      - --cluster=test-application-cluster-1
